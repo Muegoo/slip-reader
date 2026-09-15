@@ -41,8 +41,8 @@ func TestReadEveryFixtureThroughPipeline(t *testing.T) {
 func TestReadPropagatesEngineError(t *testing.T) {
 	boom := errors.New("boom")
 	doc, err := slipreader.New(&ocr.Fake{Err: boom}).Read(context.Background(), nil)
-	if !errors.Is(err, boom) || !strings.Contains(err.Error(), "ocr") {
-		t.Errorf("error = %v ต้องห่อ boom และบอกว่ามาจาก ocr", err)
+	if !errors.Is(err, boom) || !strings.Contains(err.Error(), "slipreader") {
+		t.Errorf("error = %v ต้องห่อ boom และบอกว่ามาจาก slipreader", err)
 	}
 	if doc != nil {
 		t.Errorf("Document ต้องเป็น nil เมื่อ error ได้ %+v", doc)

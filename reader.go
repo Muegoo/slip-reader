@@ -23,7 +23,7 @@ type reader struct {
 func (r *reader) Read(ctx context.Context, image []byte) (*Document, error) {
 	raw, err := r.engine.Recognize(ctx, image)
 	if err != nil {
-		return nil, fmt.Errorf("slipreader: ocr: %w", err)
+		return nil, fmt.Errorf("slipreader: %w", err)
 	}
 
 	lines := textnorm.CleanLines(raw)
