@@ -1,0 +1,13 @@
+{
+  "type": "receipt",
+  "issuer": "paotang",
+  "amount_satang": 2000,
+  "occurred_at": "2026-09-01T12:35:00+07:00",
+  "counterparty": "โชคเทพขุนแผน",
+  "ref": "fb6870f3250973c62cbdafb65b79767e",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

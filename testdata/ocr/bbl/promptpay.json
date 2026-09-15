@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "bbl",
+  "amount_satang": 2931100,
+  "occurred_at": "2026-05-29T09:28:00+07:00",
+  "counterparty": "นาย สมชาย ใจดี",
+  "ref": "5359385232514956337858431",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "receipt",
+  "issuer": "7eleven",
+  "amount_satang": 13900,
+  "occurred_at": "2026-09-11T09:23:00+07:00",
+  "counterparty": "7-Eleven ถนนจอมทอง",
+  "ref": "593208239786853",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

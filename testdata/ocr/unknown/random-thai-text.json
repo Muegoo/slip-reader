@@ -1,0 +1,13 @@
+{
+  "type": "unknown",
+  "issuer": "unknown",
+  "amount_satang": 0,
+  "occurred_at": "0001-01-01T00:00:00Z",
+  "counterparty": "",
+  "ref": "",
+  "confidence": {
+    "amount": "missing",
+    "counterparty": "missing",
+    "occurred_at": "missing"
+  }
+}

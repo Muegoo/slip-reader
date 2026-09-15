@@ -1,0 +1,13 @@
+{
+  "type": "receipt",
+  "issuer": "paotang",
+  "amount_satang": 8160,
+  "occurred_at": "2026-09-09T19:57:00+07:00",
+  "counterparty": "ปานิปูริ",
+  "ref": "",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

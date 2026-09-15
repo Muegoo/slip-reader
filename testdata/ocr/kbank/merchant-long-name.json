@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 7000,
+  "occurred_at": "2026-09-10T12:02:00+07:00",
+  "counterparty": "คาเฟอเมซอน สาขาา อาคารพญาไทพลาซ่า",
+  "ref": "672819786883CQR62645",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

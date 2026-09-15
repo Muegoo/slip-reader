@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 50000,
+  "occurred_at": "2026-09-01T07:35:00+07:00",
+  "counterparty": "พร้อมเพย์ อี-วอลเล็ต / G-Wallet",
+  "ref": "672800639100CPM60885",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

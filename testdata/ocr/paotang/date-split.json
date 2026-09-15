@@ -1,0 +1,13 @@
+{
+  "type": "receipt",
+  "issuer": "paotang",
+  "amount_satang": 1800,
+  "occurred_at": "2026-09-02T12:21:00+07:00",
+  "counterparty": "ข้าวไข่เจียวแม่แอ็ดพญาไท",
+  "ref": "0405d7bd5fb4795b2fdb2062eda06dd5",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

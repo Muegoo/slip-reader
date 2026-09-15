@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "dime",
+  "amount_satang": 1000000,
+  "occurred_at": "2026-07-13T13:05:00+07:00",
+  "counterparty": "นาย สมชายใจดี",
+  "ref": "942746225571",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

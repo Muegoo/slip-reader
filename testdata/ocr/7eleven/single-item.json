@@ -1,0 +1,13 @@
+{
+  "type": "receipt",
+  "issuer": "7eleven",
+  "amount_satang": 3900,
+  "occurred_at": "2026-09-02T12:25:00+07:00",
+  "counterparty": "CP TOWER 3",
+  "ref": "5359323533333338412538016",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "ttb",
+  "amount_satang": 58850,
+  "occurred_at": "2026-06-28T13:08:00+07:00",
+  "counterparty": "ทรูมูฟ เอช แบบรายเดือน",
+  "ref": "593951463158581154",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

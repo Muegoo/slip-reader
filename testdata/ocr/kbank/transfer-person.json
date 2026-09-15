@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 19900,
+  "occurred_at": "2026-05-29T10:18:00+07:00",
+  "counterparty": "นายสมหญิง รักดี",
+  "ref": "672705767402CTF67717",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

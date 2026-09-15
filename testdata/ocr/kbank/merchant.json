@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 11900,
+  "occurred_at": "2026-09-01T12:16:00+07:00",
+  "counterparty": "บ.เซ็นทรัล เรสตอรองส์กรุ๊ปจก",
+  "ref": "672878907298DQR65814",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

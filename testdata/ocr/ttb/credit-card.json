@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "ttb",
+  "amount_satang": 725367,
+  "occurred_at": "2026-05-29T09:31:00+07:00",
+  "counterparty": "บัตรเครดิต ทีทีบี",
+  "ref": "593852326484387311",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}

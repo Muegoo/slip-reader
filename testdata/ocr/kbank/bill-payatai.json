@@ -1,0 +1,13 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 6000,
+  "occurred_at": "2026-09-01T18:33:00+07:00",
+  "counterparty": "Payatai Plaza",
+  "ref": "672800749909CPM72732",
+  "confidence": {
+    "amount": "high",
+    "counterparty": "high",
+    "occurred_at": "high"
+  }
+}
