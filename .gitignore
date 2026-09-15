@@ -1,0 +1,15 @@
+# สลิปจริงและผล OCR ของมัน — มีชื่อและเลขบัญชีของคนอื่น ห้ามหลุดเด็ดขาด
+testdata/slips-raw/
+testdata/ocr-cache/
+
+# ความลับ
+.env
+.env.*
+
+# Go
+*.test
+*.out
+coverage.txt
+
+# OS
+.DS_Store
