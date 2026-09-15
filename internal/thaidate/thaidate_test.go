@@ -40,7 +40,7 @@ func TestParse(t *testing.T) {
 func TestParseRejectsNonDates(t *testing.T) {
 	for _, in := range []string{
 		"จำนวน: 119.00 บาท",
-		"016244121632DQR09258",
+		"672878907298DQR65814",
 		"2 ก.ย. 2569", // มีวันแต่ไม่มีเวลา — ผู้เรียกต้อง join บรรทัดเวลาให้ก่อน
 		"12:21 น.",
 		"",

@@ -15,7 +15,7 @@ func TestCleanLinesDropsJunk(t *testing.T) {
 }
 
 func TestSquashRemovesAllWhitespace(t *testing.T) {
-	if got := Squash(" นาย ธิติวุฒิ\tวงศ์ษา \n"); got != "นายธิติวุฒิวงศ์ษา" {
+	if got := Squash(" นาย สมชาย\tใจดี \n"); got != "นายสมชายใจดี" {
 		t.Errorf("Squash = %q", got)
 	}
 }
@@ -36,7 +36,7 @@ func TestSimilarIgnoresToneMarksAndSpaces(t *testing.T) {
 		{"ข้าวไข่เจียวแม่แอ็ดพญาไท", "ข้าวไข่เจียวแม่แอ๊ดพญาไท", true},
 		{"Payatai Plaza", "Payatai Plaza", true},
 		{"บ.เซ็นทรัล เรสตอรองส์กรุ๊ปจก", "บ.เซ็นทรัล เรสตอรองส์ กรุ๊ป จก.", true}, // OCR ตัดจุดและช่องว่างหาย
-		{"นาย ธิติวุฒิ วงศษา", "นาย ธิติวุฒิ วงศ์ษา", true},                       // การันต์หาย
+		{"นาย สมชาย วงศดี", "นาย สมชาย วงศ์ดี", true},                             // การันต์หาย
 		{"โจ๊กพญาไท", "ชูครีมมัช", false},
 		{"", "", true},
 	}
@@ -53,7 +53,7 @@ func TestLetterCount(t *testing.T) {
 		want int
 	}{
 		{"K+", 1},
-		{"xxx-x-x4412-x", 6},
+		{"xxx-x-x1234-x", 6},
 		{"นาย สมชาย", 8},
 		{")", 0},
 	}

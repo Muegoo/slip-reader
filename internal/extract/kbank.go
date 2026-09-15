@@ -12,7 +12,7 @@ import (
 // ทุกใบเป็นเงินออกจากบัญชี ไม่ว่าหัวจะเขียน โอน/ชำระ/จ่ายบิล/เติมเงิน จึงเป็น transfer ทั้งหมด
 type kbank struct{}
 
-// เลขที่รายการของ K PLUS เช่น 016244121632DQR09258 หรือตัวเลขล้วน 18 หลัก
+// เลขที่รายการของ K PLUS เช่น 672878907298DQR65814 หรือตัวเลขล้วน 18 หลัก
 var kbankRefPattern = regexp.MustCompile(`^[0-9A-Z]{15,}$`)
 
 func (kbank) Extract(lines []string) Result {

@@ -22,7 +22,7 @@ func TestDetectEveryFixture(t *testing.T) {
 func TestDetectPrefersSenderOverRecipientBank(t *testing.T) {
 	// สลิป K PLUS ที่โอนไป Dime มีชื่อธนาคารของ Dime อยู่ในช่องผู้รับ — ต้องตอบ kbank ไม่ใช่ dime
 	lines := []string{"โอนเงินสำเร็จ", "K+", "1 ก.ย. 69 07:35 น.", "นาย สมชาย ใ", "ธ.กสิกรไทย",
-		"xxx-x-x1234-x", "นาย สมชาย ใจดี", "ธ.เกียรตินาคินภัทร", "xxx-x-x0640-x"}
+		"xxx-x-x1234-x", "นาย สมชาย ใจดี", "ธ.เกียรตินาคินภัทร", "xxx-x-x5678-x"}
 	if got := Detect(lines); got != kind.KBank {
 		t.Errorf("Detect = %q ต้องการ kbank", got)
 	}
