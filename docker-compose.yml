@@ -1,5 +1,5 @@
 # รัน OCR engine อย่างเดียว — สำหรับ dev, CLI (cmd/slipread) และ accuracy harness (cmd/accuracy)
-# แอปที่ใช้ slip-reader (เช่น banchee) จะมี compose ของตัวเองที่รวม service นี้เข้าไป
+# แอปที่ใช้ slip-reader (เช่น keptang) จะมี compose ของตัวเองที่รวม service นี้เข้าไป
 services:
   ocr:
     # PaddlePaddle Linux รองรับ x86_64; Docker Desktop จะแปลงคำสั่งให้บน Apple Silicon
