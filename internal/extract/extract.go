@@ -34,7 +34,9 @@ type Extractor interface {
 }
 
 var extractors = map[string]Extractor{
-	kind.KBank: kbank{},
+	kind.KBank:       kbank{},
+	kind.Paotang:     paotang{},
+	kind.SevenEleven: sevenEleven{},
 }
 
 // For คืนตัวแกะฟิลด์ของ issuer นั้น หรือตัวสำรองทั่วไปถ้าไม่รู้จัก
