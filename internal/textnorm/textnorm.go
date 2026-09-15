@@ -60,19 +60,29 @@ func Squash(s string) string {
 	}, s)
 }
 
-// StripToneMarks ตัดวรรณยุกต์ ( ่ ้ ๊ ๋ ) และไม้ไต่คู้ ( ็ ) ออก
-// เพราะเป็นตัวที่ OCR อ่านเพี้ยนบ่อยที่สุดในชื่อร้าน
+// StripToneMarks ตัดวรรณยุกต์ ( ่ ้ ๊ ๋ ) ไม้ไต่คู้ ( ็ ) และการันต์ ( ์ ) ออก
+// เพราะเป็นตัวเล็ก ๆ เหนือพยัญชนะที่ OCR อ่านหายหรือเพี้ยนบ่อยที่สุด ("วงศ์ษา" → "วงศษา")
 func StripToneMarks(s string) string {
 	return strings.Map(func(r rune) rune {
 		switch r {
-		case '่', '้', '๊', '๋', '็':
+		case '่', '้', '๊', '๋', '็', '์':
 			return -1
 		}
 		return r
 	}, s)
 }
 
-// Similar เทียบข้อความสองชิ้นแบบหยาบ: ไม่สนช่องว่างและวรรณยุกต์
+// Similar เทียบข้อความสองชิ้นแบบหยาบ: เหลือแค่ตัวอักษรกับตัวเลข ไม่สนช่องว่าง วรรณยุกต์ และเครื่องหมายวรรคตอน
+// ("บ.เซ็นทรัล เรสตอรองส์ กรุ๊ป จก." กับ "บ.เซ็นทรัล เรสตอรองส์กรุ๊ปจก" ถือว่าเหมือนกัน)
 func Similar(a, b string) bool {
-	return Squash(StripToneMarks(a)) == Squash(StripToneMarks(b))
+	return comparable(a) == comparable(b)
+}
+
+func comparable(s string) string {
+	return strings.Map(func(r rune) rune {
+		if unicode.IsLetter(r) || unicode.IsDigit(r) {
+			return r
+		}
+		return -1
+	}, StripToneMarks(s))
 }

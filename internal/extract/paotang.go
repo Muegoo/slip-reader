@@ -2,6 +2,7 @@ package extract
 
 import (
 	"regexp"
+	"strings"
 
 	"github.com/Muegoo/slip-reader/internal/kind"
 )
@@ -25,8 +26,13 @@ func (paotang) Extract(lines []string) Result {
 		r.OccurredAt, r.OccurredAtLevel = t, kind.High
 	}
 	// ชื่อร้านคือบรรทัดข้อความแรกหลังบล็อกผู้จ่าย (G-Wallet ID + เลขท้าย)
+	// ถ้าชื่อยาว แอปตัดคำว่า "สาขา …" ลงบรรทัดถัดไป — ต่อกลับให้ครบ เพราะสาขาเป็นส่วนของชื่อร้าน
 	if i := indexOf(lines, "G-Wallet ID"); i >= 0 {
-		if name, ok := nextTextLine(lines, i); ok {
+		if j := nextTextLineIndex(lines, i); j >= 0 {
+			name := lines[j]
+			if j+1 < len(lines) && strings.HasPrefix(lines[j+1], "สาขา") {
+				name += " " + lines[j+1]
+			}
 			r.Counterparty, r.CounterpartyLevel = name, kind.High
 		}
 	}

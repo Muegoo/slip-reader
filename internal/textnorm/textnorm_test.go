@@ -21,7 +21,7 @@ func TestSquashRemovesAllWhitespace(t *testing.T) {
 }
 
 func TestStripToneMarks(t *testing.T) {
-	if got := StripToneMarks("มี่เสวี่ย โจ๊ก แอ็ด ต๋อม ป้า"); got != "มีเสวีย โจก แอด ตอม ปา" {
+	if got := StripToneMarks("มี่เสวี่ย โจ๊ก แอ็ด ต๋อม ป้า วงศ์ษา"); got != "มีเสวีย โจก แอด ตอม ปา วงศษา" {
 		t.Errorf("StripToneMarks = %q", got)
 	}
 }
@@ -35,6 +35,8 @@ func TestSimilarIgnoresToneMarksAndSpaces(t *testing.T) {
 		{"พี่ทีที่สเตชัน-สาขาจอมทอง", "พีทีที สเตชั่น-สาขาจอมทอง", true}, // สระ/วรรณยุกต์เพี้ยน + ช่องว่าง
 		{"ข้าวไข่เจียวแม่แอ็ดพญาไท", "ข้าวไข่เจียวแม่แอ๊ดพญาไท", true},
 		{"Payatai Plaza", "Payatai Plaza", true},
+		{"บ.เซ็นทรัล เรสตอรองส์กรุ๊ปจก", "บ.เซ็นทรัล เรสตอรองส์ กรุ๊ป จก.", true}, // OCR ตัดจุดและช่องว่างหาย
+		{"นาย ธิติวุฒิ วงศษา", "นาย ธิติวุฒิ วงศ์ษา", true},                       // การันต์หาย
 		{"โจ๊กพญาไท", "ชูครีมมัช", false},
 		{"", "", true},
 	}

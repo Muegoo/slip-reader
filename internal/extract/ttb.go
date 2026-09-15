@@ -5,7 +5,6 @@ import (
 
 	"github.com/Muegoo/slip-reader/internal/amount"
 	"github.com/Muegoo/slip-reader/internal/kind"
-	"github.com/Muegoo/slip-reader/internal/thaidate"
 )
 
 // ttb แกะสลิปจ่ายบิลจากแอป ttb touch
@@ -18,13 +17,9 @@ type ttb struct{}
 func (ttb) Extract(lines []string) Result {
 	r := emptyResult(kind.DocTransfer)
 
-	dateIndex := -1
-	for i, line := range lines {
-		if t, ok := thaidate.Parse(line); ok {
-			r.OccurredAt, r.OccurredAtLevel = t, kind.High
-			dateIndex = i
-			break
-		}
+	t, dateIndex, hasDate := firstDateSpan(lines)
+	if hasDate {
+		r.OccurredAt, r.OccurredAtLevel = t, kind.High
 	}
 	if v, ok := ttbAmount(lines, dateIndex); ok {
 		r.AmountSatang, r.AmountLevel = v, kind.High

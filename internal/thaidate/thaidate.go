@@ -27,11 +27,14 @@ var thaiMonths = map[string]time.Month{
 	"ต.ค.": time.October, "พ.ย.": time.November, "ธ.ค.": time.December,
 }
 
+const yearPattern = `25\d{2}|20\d{2}|\d{2}`
+
 var (
 	// "29 พ.ค. 69" / "28ก.ค. 69" / "7 ก.ย.69" — ช่องว่างหายได้ทุกจุดเพราะ OCR
-	thaiDatePattern = regexp.MustCompile(`(\d{1,2})\s*(ม\.ค\.|ก\.พ\.|มี\.ค\.|เม\.ย\.|พ\.ค\.|มิ\.ย\.|ก\.ค\.|ส\.ค\.|ก\.ย\.|ต\.ค\.|พ\.ย\.|ธ\.ค\.)\s*(\d{2,4})`)
+	// ปีรับ 25xx / 20xx / หรือ 2 หลัก ตามลำดับ — ห้ามใช้ \d{2,4} เพราะ "6907:35" (ปีติดเวลา) จะถูกกินเป็นปี 6907
+	thaiDatePattern = regexp.MustCompile(`(\d{1,2})\s*(ม\.ค\.|ก\.พ\.|มี\.ค\.|เม\.ย\.|พ\.ค\.|มิ\.ย\.|ก\.ค\.|ส\.ค\.|ก\.ย\.|ต\.ค\.|พ\.ย\.|ธ\.ค\.)\s*(` + yearPattern + `)`)
 	// "14/09/69" แบบใบเสร็จ 7-Eleven
-	numericDatePattern = regexp.MustCompile(`(\d{1,2})/(\d{1,2})/(\d{2,4})`)
+	numericDatePattern = regexp.MustCompile(`(\d{1,2})/(\d{1,2})/(` + yearPattern + `)`)
 	timePattern        = regexp.MustCompile(`(\d{1,2}):(\d{2})`)
 )
 

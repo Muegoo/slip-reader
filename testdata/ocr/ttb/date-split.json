@@ -1,0 +1,9 @@
+{
+  "type": "transfer",
+  "issuer": "ttb",
+  "amount_satang": 371826,
+  "occurred_at": "2026-08-29T13:38:00+07:00",
+  "counterparty": "การไฟฟ้านครหลวง",
+  "ref": "",
+  "confidence": {"amount": "high", "counterparty": "high", "occurred_at": "high"}
+}

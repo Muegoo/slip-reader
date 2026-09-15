@@ -1,0 +1,9 @@
+{
+  "type": "transfer",
+  "issuer": "kbank",
+  "amount_satang": 1760000,
+  "occurred_at": "2026-09-01T07:35:00+07:00",
+  "counterparty": "นาย สมชาย ใจดี",
+  "ref": "349577306853D3R32166",
+  "confidence": {"amount": "high", "counterparty": "high", "occurred_at": "high"}
+}

@@ -1,0 +1,9 @@
+{
+  "type": "receipt",
+  "issuer": "paotang",
+  "amount_satang": 5760,
+  "occurred_at": "2026-09-14T12:25:00+07:00",
+  "counterparty": "รุ่มรวยก๋วยเตียวไก่ สาขา เมกะบางนา",
+  "ref": "df93653e164270eb19c570c1e3bf034a",
+  "confidence": {"amount": "high", "counterparty": "high", "occurred_at": "high"}
+}

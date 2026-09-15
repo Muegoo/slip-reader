@@ -94,9 +94,16 @@ func amountAfter(lines []string, keyword string) (amount.Satang, bool) {
 	return 0, false
 }
 
-// firstDate หาวันเวลาแรกในเอกสาร ลองทีละบรรทัด และลองต่อบรรทัดถัดไปอีก 1-2 บรรทัด
-// เพราะเป๋าตังบางใบพิมพ์ "1 ก.ย." / "2569" / "12:35 น." แยกกันสามบรรทัด
+// firstDate หาวันเวลาแรกในเอกสาร
 func firstDate(lines []string) (time.Time, bool) {
+	t, _, ok := firstDateSpan(lines)
+	return t, ok
+}
+
+// firstDateSpan เหมือน firstDate แต่คืนดัชนีบรรทัดสุดท้ายที่วันเวลาใช้ไปด้วย
+// ลองทีละบรรทัด และลองต่อบรรทัดถัดไปอีก 1-2 บรรทัด เพราะเป๋าตังและ ttb บางใบ
+// พิมพ์ "29ส.ค." / "69," / "13:38 น." แยกกันสามบรรทัด
+func firstDateSpan(lines []string) (time.Time, int, bool) {
 	for i := range lines {
 		joined := lines[i]
 		for extra := 0; extra <= 2; extra++ {
@@ -107,11 +114,11 @@ func firstDate(lines []string) (time.Time, bool) {
 				joined += " " + lines[i+extra]
 			}
 			if t, ok := thaidate.Parse(joined); ok {
-				return t, true
+				return t, i + extra, true
 			}
 		}
 	}
-	return time.Time{}, false
+	return time.Time{}, -1, false
 }
 
 // รูปแบบเลขบัญชี/บัตร/PromptPay ที่ถูกปิดบังบางส่วน เช่น xxx-x-x1234-x, 4050-16XX-XXXX-9876, 081-xxx-2222
@@ -128,12 +135,21 @@ func isText(line string) bool {
 
 // nextTextLine คืนบรรทัดข้อความแรกถัดจาก from
 func nextTextLine(lines []string, from int) (string, bool) {
+	j := nextTextLineIndex(lines, from)
+	if j < 0 {
+		return "", false
+	}
+	return lines[j], true
+}
+
+// nextTextLineIndex เหมือน nextTextLine แต่คืนดัชนี (-1 ถ้าไม่มี) สำหรับตัวแกะที่ต้องดูบรรทัดถัดไปต่อ
+func nextTextLineIndex(lines []string, from int) int {
 	for j := from + 1; j < len(lines); j++ {
 		if isText(lines[j]) {
-			return lines[j], true
+			return j
 		}
 	}
-	return "", false
+	return -1
 }
 
 // valueAfterLabel คืนข้อความหลังคำนำหน้าในบรรทัดเดียวกัน (ตัด ":" และช่องว่างออก)
