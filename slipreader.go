@@ -8,28 +8,30 @@ package slipreader
 import (
 	"context"
 	"time"
+
+	"github.com/Muegoo/slip-reader/internal/kind"
 )
 
 // DocType บอกว่าเอกสารเป็นสลิปโอนเงินหรือใบเสร็จร้านค้า
 type DocType string
 
 const (
-	DocTypeTransfer DocType = "transfer"
-	DocTypeReceipt  DocType = "receipt"
-	DocTypeUnknown  DocType = "unknown"
+	DocTypeTransfer DocType = kind.DocTransfer
+	DocTypeReceipt  DocType = kind.DocReceipt
+	DocTypeUnknown  DocType = kind.DocUnknown
 )
 
 // Issuer คือแอปหรือร้านที่ออกเอกสาร เรียงตามจำนวนที่พบจริงในชุดข้อมูลของเจ้าของโปรเจค
 type Issuer string
 
 const (
-	IssuerKBank       Issuer = "kbank"   // K PLUS
-	IssuerPaotang     Issuer = "paotang" // เป๋าตัง
-	IssuerTTB         Issuer = "ttb"
-	IssuerSevenEleven Issuer = "7eleven" // ใบเสร็จใน 7App
-	IssuerBBL         Issuer = "bbl"     // Bangkok Bank
-	IssuerDime        Issuer = "dime"
-	IssuerUnknown     Issuer = "unknown"
+	IssuerKBank       Issuer = kind.KBank       // K PLUS
+	IssuerPaotang     Issuer = kind.Paotang     // เป๋าตัง
+	IssuerTTB         Issuer = kind.TTB
+	IssuerSevenEleven Issuer = kind.SevenEleven // ใบเสร็จใน 7App
+	IssuerBBL         Issuer = kind.BBL         // Bangkok Bank
+	IssuerDime        Issuer = kind.Dime
+	IssuerUnknown     Issuer = kind.Unknown
 )
 
 // Level คือความมั่นใจของฟิลด์หนึ่ง ๆ
@@ -40,9 +42,9 @@ const (
 type Level string
 
 const (
-	LevelHigh    Level = "high"
-	LevelLow     Level = "low"
-	LevelMissing Level = "missing"
+	LevelHigh    Level = kind.High
+	LevelLow     Level = kind.Low
+	LevelMissing Level = kind.Missing
 )
 
 // Confidence บอกความมั่นใจแยกทีละฟิลด์ เพราะ UX ต้องรู้ว่า "ยอดชัดแต่ชื่อร้านอ่านไม่ออก"
