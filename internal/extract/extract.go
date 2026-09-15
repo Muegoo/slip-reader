@@ -37,6 +37,9 @@ var extractors = map[string]Extractor{
 	kind.KBank:       kbank{},
 	kind.Paotang:     paotang{},
 	kind.SevenEleven: sevenEleven{},
+	kind.TTB:         ttb{},
+	kind.BBL:         bbl{},
+	kind.Dime:        dime{},
 }
 
 // For คืนตัวแกะฟิลด์ของ issuer นั้น หรือตัวสำรองทั่วไปถ้าไม่รู้จัก
@@ -118,10 +121,15 @@ func looksLikeAccount(line string) bool {
 	return accountPattern.MatchString(line) && strings.ContainsAny(line, "0123456789")
 }
 
-// nextTextLine คืนบรรทัดถัดจาก from ที่ "เป็นข้อความ" — มีตัวอักษรอย่างน้อย 3 ตัว และไม่ใช่เลขบัญชี
+// isText บอกว่าบรรทัดนี้ "เป็นข้อความ" พอจะเป็นชื่อได้ — มีตัวอักษรอย่างน้อย 3 ตัว และไม่ใช่เลขบัญชี
+func isText(line string) bool {
+	return textnorm.LetterCount(line) >= 3 && !looksLikeAccount(line)
+}
+
+// nextTextLine คืนบรรทัดข้อความแรกถัดจาก from
 func nextTextLine(lines []string, from int) (string, bool) {
 	for j := from + 1; j < len(lines); j++ {
-		if textnorm.LetterCount(lines[j]) >= 3 && !looksLikeAccount(lines[j]) {
+		if isText(lines[j]) {
 			return lines[j], true
 		}
 	}
