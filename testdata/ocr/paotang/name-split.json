@@ -1,0 +1,9 @@
+{
+  "type": "receipt",
+  "issuer": "paotang",
+  "amount_satang": 16600,
+  "occurred_at": "2026-09-04T12:46:00+07:00",
+  "counterparty": "Maki แซลมอน",
+  "ref": "",
+  "confidence": {"amount": "high", "counterparty": "high", "occurred_at": "high"}
+}

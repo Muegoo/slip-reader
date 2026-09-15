@@ -23,6 +23,10 @@ func (ttb) Extract(lines []string) Result {
 	}
 	if v, ok := ttbAmount(lines, dateIndex); ok {
 		r.AmountSatang, r.AmountLevel = v, kind.High
+	} else if v, ok := amountBeforeFee(lines); ok {
+		// อ่านวันที่ไม่ออก (OCR อ่าน "มิ.ย." เป็น "ม.ย.") ไม่ควรลากยอดให้หายไปด้วย —
+		// ยอดของ ttb อยู่บรรทัดก่อน "ค่าธรรมเนียม" เสมอ แต่ไม่มีวันที่ยึดจึงมั่นใจน้อยกว่า
+		r.AmountSatang, r.AmountLevel = v, kind.Low
 	}
 	if name, ok := ttbCounterparty(lines); ok {
 		r.Counterparty, r.CounterpartyLevel = name, kind.High
@@ -46,6 +50,15 @@ func ttbAmount(lines []string, dateIndex int) (amount.Satang, bool) {
 		}
 	}
 	return 0, false
+}
+
+// amountBeforeFee คืนยอดจากบรรทัดที่อยู่ก่อนบรรทัด "ค่าธรรมเนียม" ทันที
+func amountBeforeFee(lines []string) (amount.Satang, bool) {
+	i := indexOf(lines, "ค่าธรรมเนียม")
+	if i <= 0 {
+		return 0, false
+	}
+	return amount.Parse(lines[i-1])
 }
 
 // ttbCounterparty: ผู้รับบิลคือบรรทัดข้อความแรกหลังเลขบัญชี/บัตรของผู้จ่าย โดยข้ามบรรทัดโลโก้ "ttb"

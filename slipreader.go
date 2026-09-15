@@ -64,7 +64,7 @@ type Document struct {
 	Counterparty string     `json:"counterparty"`  // สลิปโอน = ผู้รับ / ใบเสร็จ = ร้าน + สาขา
 	Ref          string     `json:"ref"`           // เลขอ้างอิง ถ้ามี (ว่างได้)
 	Confidence   Confidence `json:"confidence"`
-	RawLines     []string   `json:"raw_lines"` // ข้อความดิบจาก OCR ทีละบรรทัด — ให้แอปเก็บไว้รันใหม่ทีหลังได้
+	RawLines     []string   `json:"raw_lines,omitempty"` // ข้อความดิบจาก OCR ทีละบรรทัด — ให้แอปเก็บไว้รันใหม่ทีหลังได้
 }
 
 // Reader อ่านรูปหนึ่งรูป
