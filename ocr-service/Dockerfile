@@ -1,7 +1,9 @@
 # ocr-service — PaddleOCR หลัง HTTP สำหรับ slip-reader
 #
 # ไม่มีโค้ด Python ที่เขียนเองในนี้: ใช้ตัว serving ที่มากับ PaddleX แล้ว pin โมเดลผ่าน OCR.yaml
-# เวอร์ชันตรงกับที่ใช้ตอน spike เพื่อให้ผลอ่านตรงกับ fixture ใน testdata/ocr
+# paddleocr/paddlex ตรงกับ spike ส่วน paddlepaddle pin ที่ 3.2.2 (spike บน macOS ใช้ 3.3.1 ได้ปกติ
+# แต่ 3.3.x บน Linux x86_64 พัง: "ConvertPirAttribute2RuntimeAttribute not support" ตอน inference)
+# image เป็น linux/amd64 เพราะ wheel Linux ARM64 ติดตั้งได้แต่ SIGSEGV ตอน inference — ดู README ข้าง ๆ
 FROM python:3.10-slim
 
 # libgomp = OpenMP runtime ที่ paddlepaddle ต้องการ / libgl+glib = ของ opencv ที่ paddleocr ใช้เปิดรูป
@@ -10,7 +12,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir \
-    paddlepaddle==3.3.1 \
+    paddlepaddle==3.2.2 \
     paddleocr==3.7.0 \
     "paddlex[serving]==3.7.2"
 

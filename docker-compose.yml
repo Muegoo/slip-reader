@@ -2,6 +2,9 @@
 # แอปที่ใช้ slip-reader (เช่น banchee) จะมี compose ของตัวเองที่รวม service นี้เข้าไป
 services:
   ocr:
+    # PaddlePaddle Linux รองรับ x86_64; Docker Desktop จะแปลงคำสั่งให้บน Apple Silicon
+    # การใช้ image ARM64 แม้ติดตั้ง wheel ได้จะ SIGSEGV ตอนเริ่ม inference
+    platform: linux/amd64
     build: ./ocr-service
     # spike: mobile pipeline พีค ~2.4 GB ที่ 4 thread — เผื่อไว้ 4 GB ตัว server det เคยกินจนระบบฆ่า
     mem_limit: 4g
