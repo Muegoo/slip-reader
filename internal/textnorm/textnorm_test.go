@@ -31,7 +31,7 @@ func TestSimilarIgnoresToneMarksAndSpaces(t *testing.T) {
 		a, b string
 		want bool
 	}{
-		{"มี่เสวีย", "มี่เสวี่ย", true},                                 // spike: Paddle อ่านวรรณยุกต์หาย
+		{"มี่เสวีย", "มี่เสวี่ย", true},                                  // spike: Paddle อ่านวรรณยุกต์หาย
 		{"พี่ทีที่สเตชัน-สาขาจอมทอง", "พีทีที สเตชั่น-สาขาจอมทอง", true}, // สระ/วรรณยุกต์เพี้ยน + ช่องว่าง
 		{"ข้าวไข่เจียวแม่แอ็ดพญาไท", "ข้าวไข่เจียวแม่แอ๊ดพญาไท", true},
 		{"Payatai Plaza", "Payatai Plaza", true},
