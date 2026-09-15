@@ -6,6 +6,7 @@ import (
 
 	"github.com/Muegoo/slip-reader/internal/extract"
 	"github.com/Muegoo/slip-reader/internal/issuer"
+	"github.com/Muegoo/slip-reader/internal/qr"
 	"github.com/Muegoo/slip-reader/internal/textnorm"
 	"github.com/Muegoo/slip-reader/ocr"
 )
@@ -29,6 +30,12 @@ func (r *reader) Read(ctx context.Context, image []byte) (*Document, error) {
 	lines := textnorm.CleanLines(raw)
 	who := issuer.Detect(lines)
 	result := extract.For(who).Extract(lines)
+
+	// เลขอ้างอิงจาก QR แม่นกว่าจาก OCR (ไม่มีตัวเลขเพี้ยน) จึงใช้แทนถ้าถอดได้
+	// ถอดไม่ได้ไม่ใช่ error — ใบเสร็จและ e-wallet บางเจ้าไม่มี QR เลย
+	if ref, ok := qr.Decode(image); ok {
+		result.Ref = ref
+	}
 	return buildDocument(who, result, raw), nil
 }
 

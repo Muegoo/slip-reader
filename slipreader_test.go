@@ -1,15 +1,19 @@
 package slipreader_test
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
+	"image/png"
 	"strings"
 	"testing"
 
 	slipreader "github.com/Muegoo/slip-reader"
 	"github.com/Muegoo/slip-reader/internal/testfixture"
 	"github.com/Muegoo/slip-reader/ocr"
+	"github.com/makiuchi-d/gozxing"
+	"github.com/makiuchi-d/gozxing/qrcode"
 )
 
 func TestReadEveryFixtureThroughPipeline(t *testing.T) {
@@ -58,5 +62,30 @@ func TestReadEmptyTextIsNotAnError(t *testing.T) {
 	all := slipreader.Confidence{Amount: slipreader.LevelMissing, Counterparty: slipreader.LevelMissing, OccurredAt: slipreader.LevelMissing}
 	if doc.Issuer != slipreader.IssuerUnknown || doc.Type != slipreader.DocTypeUnknown || doc.Confidence != all {
 		t.Errorf("Document = %+v", *doc)
+	}
+}
+
+func TestReadPrefersQRReference(t *testing.T) {
+	const payload = "0046000600000101030020111234567890123"
+	matrix, err := qrcode.NewQRCodeWriter().Encode(payload, gozxing.BarcodeFormat_QR_CODE, 300, 300, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var img bytes.Buffer
+	if err := png.Encode(&img, matrix); err != nil {
+		t.Fatal(err)
+	}
+
+	lines := []string{"โอนเงินสำเร็จ", "K+", "1 ก.ย. 69 07:35 น.", "ธ.กสิกรไทย", "xxx-x-x1234-x", "นาย สมชาย ใจดี",
+		"เลขที่รายการ:", "016244073520DOR09833", "จำนวน:", "500.00 บาท"}
+	doc, err := slipreader.New(&ocr.Fake{Lines: lines}).Read(context.Background(), img.Bytes())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if doc.Ref != payload {
+		t.Errorf("Ref = %q ต้องมาจาก QR %q", doc.Ref, payload)
+	}
+	if doc.AmountSatang != 50000 {
+		t.Errorf("ฟิลด์อื่นต้องยังมาจาก OCR ตามปกติ ได้ยอด %d", doc.AmountSatang)
 	}
 }
