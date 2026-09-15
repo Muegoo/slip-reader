@@ -1,0 +1,16 @@
+# รัน OCR engine อย่างเดียว — สำหรับ dev, CLI (cmd/slipread) และ accuracy harness (cmd/accuracy)
+# แอปที่ใช้ slip-reader (เช่น banchee) จะมี compose ของตัวเองที่รวม service นี้เข้าไป
+services:
+  ocr:
+    build: ./ocr-service
+    # spike: mobile pipeline พีค ~2.4 GB ที่ 4 thread — เผื่อไว้ 4 GB ตัว server det เคยกินจนระบบฆ่า
+    mem_limit: 4g
+    # bind แค่ localhost — OCR engine ไม่ควรเปิดออกภายนอกเลย (spec ข้อ 7)
+    ports:
+      - "127.0.0.1:8866:8866"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8866/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s

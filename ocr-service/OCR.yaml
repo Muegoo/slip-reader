@@ -1,0 +1,36 @@
+# pipeline config ของ PaddleX สำหรับ ocr-service
+#
+# เอาโครงมาจาก `paddlex --get_pipeline_config OCR` (PaddleX 3.7.2) แล้วแก้ 3 อย่างตามผล spike:
+#   1. ปิด doc preprocessor และ textline orientation — สลิปเป็น screenshot ตรง ๆ ไม่ต้องแก้เอียง/หมุน
+#   2. detection ใช้ PP-OCRv5_mobile_det — ตัว server ช้ากว่า ~50 เท่าบน CPU และเคยกินหน่วยความจำจนโดนฆ่า
+#   3. recognition ใช้ th_PP-OCRv5_mobile_rec — ต้องระบุชัด ไม่งั้นได้โมเดลที่ไม่รู้จักภาษาไทย
+# ผล: อ่านยอดได้ 63/63 ใบ ชื่อ 59/63 (ดู docs/superpowers/specs/2026-09-14-ocr-spike-result.md ใน repo วางแผน)
+
+pipeline_name: OCR
+
+text_type: general
+
+use_doc_preprocessor: False
+use_textline_orientation: False
+
+SubModules:
+  TextDetection:
+    module_name: text_detection
+    model_name: PP-OCRv5_mobile_det
+    model_dir: null
+    limit_side_len: 64
+    limit_type: min
+    max_side_limit: 4000
+    thresh: 0.3
+    box_thresh: 0.6
+    unclip_ratio: 1.5
+  TextRecognition:
+    module_name: text_recognition
+    model_name: th_PP-OCRv5_mobile_rec
+    model_dir: null
+    batch_size: 6
+    score_thresh: 0.0
+
+Serving:
+  # ไม่ต้องส่งรูปที่วาดกรอบกลับมา — client ต้องการแค่ข้อความ และรูป base64 ทำให้ response ใหญ่หลาย MB
+  visualize: False
