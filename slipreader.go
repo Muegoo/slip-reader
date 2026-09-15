@@ -25,8 +25,8 @@ const (
 type Issuer string
 
 const (
-	IssuerKBank       Issuer = kind.KBank       // K PLUS
-	IssuerPaotang     Issuer = kind.Paotang     // เป๋าตัง
+	IssuerKBank       Issuer = kind.KBank   // K PLUS
+	IssuerPaotang     Issuer = kind.Paotang // เป๋าตัง
 	IssuerTTB         Issuer = kind.TTB
 	IssuerSevenEleven Issuer = kind.SevenEleven // ใบเสร็จใน 7App
 	IssuerBBL         Issuer = kind.BBL         // Bangkok Bank
